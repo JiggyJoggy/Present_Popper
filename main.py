@@ -51,9 +51,15 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         hits = pygame.sprite.spritecollide(P1 , platforms, False)
+        if P1.vel.y > 0:
+            if hits:
+                self.vel.y = 0
+                self.pos.y = hits[0].rect.top + 1
+
+    def jump(self):
+        hits = pygame.sprite.spritecollide(self, platforms, False)
         if hits:
-            self.pos.y = hits[0].rect.top + 1
-            self.vel.y = 0
+            self.vel.y = -15
 
 
 class platform(pygame.sprite.Sprite):
@@ -79,6 +85,9 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_w:
+                P1.jump()
 
     displaysurface.fill((0, 0, 0))
 
