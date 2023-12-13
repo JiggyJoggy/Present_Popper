@@ -32,9 +32,9 @@ class Player(pygame.sprite.Sprite):
 
         pressed_keys = pygame.key.get_pressed()
 
-        if pressed_keys[K_LEFT]:
+        if pressed_keys[K_a]:
             self.acc.x = -ACC
-        if pressed_keys[K_RIGHT]:
+        if pressed_keys[K_d]:
             self.acc.x = ACC
 
         self.acc.x += self.vel.x * FRIC
