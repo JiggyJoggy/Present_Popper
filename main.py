@@ -16,6 +16,7 @@ FramePerSec = pygame.time.Clock()
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Game")
 
+
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -48,12 +49,14 @@ class Player(pygame.sprite.Sprite):
 
         self.rect.midbottom = self.pos
 
+
 class platform(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.surf = pygame.Surface((WIDTH, 20))
         self.surf.fill((255, 0, 0))
-        self.rect = self.surf.get_rect(center = (WIDTH/2, HEIGHT - 10))
+        self.rect = self.surf.get_rect(center=(WIDTH/2, HEIGHT - 10))
+
 
 PT1 = platform()
 P1 = Player()
