@@ -24,12 +24,12 @@ class Player(pygame.sprite.Sprite):
         self.surf.fill((255, 255, 255))
         self.rect = self.surf.get_rect()
 
-        self.pos = vec((10, 385))
+        self.pos = vec((10, 100))
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
 
     def move(self):
-        self.acc = vec(0, 0)
+        self.acc = vec(0, 0.5)
 
         pressed_keys = pygame.key.get_pressed()
 
@@ -49,6 +49,12 @@ class Player(pygame.sprite.Sprite):
 
         self.rect.midbottom = self.pos
 
+    def update(self):
+        hits = pygame.sprite.spritecollide(P1 , platforms, False)
+        if hits:
+            self.pos.y = hits[0].rect.top + 1
+            self.vel.y = 0
+
 
 class platform(pygame.sprite.Sprite):
     def __init__(self):
@@ -60,6 +66,9 @@ class platform(pygame.sprite.Sprite):
 
 PT1 = platform()
 P1 = Player()
+
+platforms = pygame.sprite.Group()
+platforms.add(PT1)
 
 all_sprites = pygame.sprite.Group()
 all_sprites.add(PT1)
@@ -73,9 +82,10 @@ while True:
 
     displaysurface.fill((0, 0, 0))
 
+    P1.move()
+    P1.update()
     for entity in all_sprites:
         displaysurface.blit(entity.surf, entity.rect)
 
-    P1.move()
     pygame.display.update()
     FramePerSec.tick(FPS)
