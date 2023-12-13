@@ -1,12 +1,12 @@
-import pygame
 import sys
+import pygame
 from pygame.locals import *
 
 pygame.init()
 vec = pygame.math.Vector2
 
-HEIGHT = 450
-WIDTH = 400
+HEIGHT = 600
+WIDTH = 1500
 ACC = 1
 FRIC = -0.12
 FPS = 60
@@ -16,6 +16,13 @@ FramePerSec = pygame.time.Clock()
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Present Popper")
 
+
+run = True
+speed = 30
+
+while run:
+    clock.tick(speed)
+    
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
