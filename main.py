@@ -25,11 +25,11 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.surf.get_rect()
 
         self.pos = vec((10, 385))
-        self.vel = vec(0,0)
-        self.acc = vec(0,0)
+        self.vel = vec(0, 0)
+        self.acc = vec(0, 0)
 
     def move(self):
-        self.acc = vec(0,0)
+        self.acc = vec(0, 0)
 
         pressed_keys = pygame.key.get_pressed()
 
