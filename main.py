@@ -7,14 +7,14 @@ vec = pygame.math.Vector2
 
 HEIGHT = 450
 WIDTH = 400
-ACC = 0.5
+ACC = 1
 FRIC = -0.12
 FPS = 60
 
 FramePerSec = pygame.time.Clock()
 
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Game")
+pygame.display.set_caption("Present Popper")
 
 
 class Player(pygame.sprite.Sprite):
@@ -50,7 +50,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.midbottom = self.pos
 
     def update(self):
-        hits = pygame.sprite.spritecollide(P1 , platforms, False)
+        hits = pygame.sprite.spritecollide(P1, platforms, False)
         if P1.vel.y > 0:
             if hits:
                 self.vel.y = 0
@@ -59,7 +59,7 @@ class Player(pygame.sprite.Sprite):
     def jump(self):
         hits = pygame.sprite.spritecollide(self, platforms, False)
         if hits:
-            self.vel.y = -15
+            self.vel.y = -9
 
 
 class platform(pygame.sprite.Sprite):
@@ -85,6 +85,9 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                P1.jump()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w:
                 P1.jump()
