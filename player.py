@@ -30,7 +30,8 @@ class Player(pygame.sprite.Sprite):
             pygame.image.load('sprites/santa/santa_right3.png').convert(),
             # Add more frames as needed
         ]
-        self.player_image_front = pygame.image.load('sprites/santa/santa_front2.png').convert()
+        self.player_image_front = pygame.image.load(
+            'sprites/santa/santa_front2.png').convert()
 
         self.current_frame = 0
         self.image = self.player_images_left[self.current_frame]
@@ -79,14 +80,18 @@ class Player(pygame.sprite.Sprite):
             # Define the animation pattern for left and right
             animation_pattern = [0, 1, 2, 1]
 
-            # Update animation frames based on facing direction and animation pattern
+            # Update animation frames based on facing direction and pattern
             if (self.vel.x != 0 or self.vel.y != 0) and (pygame.key.get_pressed()[K_a] or pygame.key.get_pressed()[K_d]):
                 if self.facing_right:
-                    self.current_frame = (self.current_frame + 1) % len(animation_pattern)
-                    self.image = self.player_images_right[animation_pattern[self.current_frame]]
+                    self.current_frame = (self.current_frame + 1) % len(
+                        animation_pattern)
+                    self.image = self.player_images_right[animation_pattern[
+                        self.current_frame]]
                 else:
-                    self.current_frame = (self.current_frame + 1) % len(animation_pattern)
-                    self.image = self.player_images_left[animation_pattern[self.current_frame]]
+                    self.current_frame = (self.current_frame + 1) % len(
+                        animation_pattern)
+                    self.image = self.player_images_left[
+                        animation_pattern[self.current_frame]]
             else:
                 # Player is not holding A or D, set the default frame
                 self.current_frame = 1
