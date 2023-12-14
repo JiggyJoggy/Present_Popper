@@ -86,10 +86,7 @@ while True:
             pygame.quit()
             sys.exit()
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                P1.jump()
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_w:
+            if event.key == pygame.K_SPACE or event.key == pygame.K_w:
                 P1.jump()
 
     displaysurface.fill((0, 0, 0))
