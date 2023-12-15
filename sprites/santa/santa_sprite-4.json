@@ -1,0 +1,21 @@
+{"frames": {
+
+"santa_5.png":
+{
+	"frame": {"x":0,"y":0,"w":1080,"h":1920},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1080,"h":1920},
+	"sourceSize": {"w":1080,"h":1920}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "santa_sprite-4.png",
+	"format": "RGBA8888",
+	"size": {"w":1080,"h":1920},
+	"scale": "1",
+	"related_multi_packs": [ "santa_sprite-0.json", "santa_sprite-1.json", "santa_sprite-2.json", "santa_sprite-3.json", "santa_sprite-5.json", "santa_sprite-6.json", "santa_sprite-7.json", "santa_sprite-8.json" ],
+	"smartupdate": "$TexturePacker:SmartUpdate:9cd3041274d6cd7859115a39c58b6e7b:7035a18407d39819d3b1435b4e7dafab:d0a9d61f9c1f0ec361aaab33d33b4de5$"
+}
+}
