@@ -16,14 +16,6 @@ FramePerSec = pygame.time.Clock()
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Present Popper")
 
-
-run = True
-speed = 30
-
-while run:
-    clock.tick(speed)
-    
-
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -87,6 +79,8 @@ all_sprites = pygame.sprite.Group()
 all_sprites.add(PT1)
 all_sprites.add(P1)
 
+camera_offset = vec(0, 0)
+
 while True:
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -103,8 +97,11 @@ while True:
 
     P1.move()
     P1.update()
+
+    camera_offset.x += (P1.pos.x - camera_offset.x - WIDTH/2) * 0.05
+    camera_offset.y += (P1.pos.y - camera_offset.y - HEIGHT/2) * 0.05
     for entity in all_sprites:
-        displaysurface.blit(entity.surf, entity.rect)
+        displaysurface.blit(entity.surf, entity.rect.move(-camera_offset.x, -camera_offset.y))
 
     pygame.display.update()
     FramePerSec.tick(FPS)
