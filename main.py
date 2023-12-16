@@ -50,13 +50,19 @@ while True:
 
     for entity in all_sprites:
         if isinstance(entity, Player):
-            displaysurface.blit(entity.image, entity.rect.move(-camera_offset.x, -camera_offset.y))
+            displaysurface.blit(
+                entity.image, entity.rect.move(
+                    -camera_offset.x, -camera_offset.y))
         elif isinstance(entity, Level):
-            displaysurface.blit(entity.image, entity.rect.move(-camera_offset.x, -camera_offset.y))
+            displaysurface.blit(
+                entity.image, entity.rect.move(
+                    -camera_offset.x, -camera_offset.y))
 
             # Iterate through endpoints and render them
             for endpoint in entity.endpoints:
-                displaysurface.blit(endpoint.image, endpoint.rect.move(-camera_offset.x, -camera_offset.y))
+                displaysurface.blit(
+                    endpoint.image, endpoint.rect.move(
+                        -camera_offset.x, -camera_offset.y))
 
             # Check for collisions with the endpoint
             if pygame.sprite.spritecollide(P1, entity.endpoints, False):
