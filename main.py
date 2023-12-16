@@ -19,7 +19,7 @@ displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Present Popper")
 
 platforms = pygame.sprite.Group()
-PT1 = Level(WIDTH, 20, RED, 0, HEIGHT - 20, 500, 100)
+PT1 = Level(WIDTH, 20, RED, 0, HEIGHT - 20, 500, 100, 'sprites/background/mountains.jpeg')
 PT1.add_platform(Platform(WIDTH, 20, RED, WIDTH/2, HEIGHT - 20))
 platforms.add(PT1)
 P1 = Player(platforms)
@@ -39,6 +39,7 @@ while True:
                 P1.jump()
 
     displaysurface.fill((0, 0, 0))
+    displaysurface.blit(PT1.background, PT1.rect)
 
     P1.move()
     P1.update()
