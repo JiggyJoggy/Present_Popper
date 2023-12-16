@@ -1,7 +1,7 @@
 import sys
 import pygame
 from pygame.locals import *
-from player import Player
+from player import Player, P1, PT1, vec
 from game_platform import Platform
 
 pygame.init()
@@ -15,11 +15,6 @@ FramePerSec = pygame.time.Clock()
 
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Present Popper")
-
-platforms = pygame.sprite.Group()
-PT1 = Platform()
-platforms.add(PT1)
-P1 = Player(platforms)  # Pass the platforms group to the Player class
 
 all_sprites = pygame.sprite.Group(PT1, P1)
 
@@ -41,11 +36,9 @@ while True:
 
     camera_offset.x += (P1.pos.x - camera_offset.x - WIDTH/2) * 0.05
     camera_offset.y += (P1.pos.y - camera_offset.y - HEIGHT/2) * 0.05
+
     for entity in all_sprites:
-        if isinstance(entity, Player):
-            displaysurface.blit(entity.image, entity.rect)
-        elif isinstance(entity, Platform):
-            displaysurface.blit(entity.surf, entity.rect)
+        displaysurface.blit(entity.surf, entity.rect.move(-camera_offset.x, -camera_offset.y))
 
     pygame.display.update()
     FramePerSec.tick(FPS)
