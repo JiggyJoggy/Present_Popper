@@ -4,8 +4,9 @@ from game_platform import Platform
 
 vec = pygame.math.Vector2
 
-HEIGHT = 1000
-WIDTH = 1000
+HEIGHT = 800
+WIDTH = 1600
+
 ACC = 1
 FRIC = -0.12
 FPS = 60

@@ -6,9 +6,10 @@ from game_platform import Platform
 
 pygame.init()
 
-HEIGHT = 1000
-WIDTH = 1000
+HEIGHT = 800
+WIDTH = 1600
 FPS = 60
+
 RED = (255, 0, 0)
 
 FramePerSec = pygame.time.Clock()
