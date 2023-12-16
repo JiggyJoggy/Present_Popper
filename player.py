@@ -1,5 +1,5 @@
 import pygame
-from pygame.locals import *
+from pygame.locals import K_a, K_d
 
 HEIGHT = 1000
 WIDTH = 1000
@@ -30,28 +30,39 @@ class Player(pygame.sprite.Sprite):
         ]
 
         self.player_images_right = [
-            pygame.image.load('sprites/santa/santa_right1.png').convert_alpha(),
-            pygame.image.load('sprites/santa/santa_right2.png').convert_alpha(),
-            pygame.image.load('sprites/santa/santa_right3.png').convert_alpha(),
+            pygame.image.load(
+                'sprites/santa/santa_right1.png').convert_alpha(),
+            pygame.image.load(
+                'sprites/santa/santa_right2.png').convert_alpha(),
+            pygame.image.load(
+                'sprites/santa/santa_right3.png').convert_alpha(),
             # Add more frames as needed
         ]
-        self.player_image_front = pygame.image.load('sprites/santa/santa_front2.png').convert()
+        self.player_image_front = pygame.image.load(
+            'sprites/santa/santa_front2.png').convert()
 
         # Resize Santa images
-        self.player_images_left = [pygame.transform.scale(image, (new_width, new_height)) for image in self.player_images_left]
-        self.player_images_right = [pygame.transform.scale(image, (new_width, new_height)) for image in self.player_images_right]
-        self.player_image_front = pygame.transform.scale(self.player_image_front, (new_width, new_height))
+        self.player_images_left = [
+            pygame.transform.scale(
+                image, (new_width,
+                        new_height)) for image in self.player_images_left]
+        self.player_images_right = [
+            pygame.transform.scale(image, (
+                new_width, new_height)) for image in self.player_images_right]
+        self.player_image_front = [
+            pygame.transform.scale(
+                self.player_image_front, (new_width, new_height))]
 
         self.current_frame = 0
         self.image = self.player_images_left[self.current_frame]
         self.rect = self.image.get_rect()
 
-        self.pos = pygame.math.Vector2((25, 500))  # Adjust the height as needed
+        self.pos = pygame.math.Vector2((25, 500))  # Adjust the height
         self.vel = pygame.math.Vector2(0, 0)
         self.acc = pygame.math.Vector2(0, 0)
         self.facing_right = True  # Initialize facing direction
 
-        self.animation_speed = 150  # Adjust this value to control the animation speed
+        self.animation_speed = 150  # Adjust animation speed
         self.animation_timer = pygame.time.get_ticks()
         self.clock = pygame.time.Clock()
 
@@ -90,7 +101,9 @@ class Player(pygame.sprite.Sprite):
             animation_pattern = [0, 1, 2, 1]
 
             # Update animation frames based on facing direction and pattern
-            if (self.vel.x != 0 or self.vel.y != 0) and (pygame.key.get_pressed()[K_a] or pygame.key.get_pressed()[K_d]):
+            if (self.vel.x != 0 or self.vel.y != 0) and (
+                 pygame.key.get_pressed()[K_a] or
+                 pygame.key.get_pressed()[K_d]):
                 if self.facing_right:
                     self.current_frame = (self.current_frame + 1) % len(
                         animation_pattern)
