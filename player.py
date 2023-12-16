@@ -9,6 +9,10 @@ FPS = 60
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 
+# Set the new width and height for the resized Santa image
+new_width = 70
+new_height = 100
+
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, platforms):
@@ -18,20 +22,24 @@ class Player(pygame.sprite.Sprite):
 
         # Load player images for animation
         self.player_images_left = [
-            pygame.image.load('sprites/santa/santa_left1.png').convert(),
-            pygame.image.load('sprites/santa/santa_left2.png').convert(),
-            pygame.image.load('sprites/santa/santa_left3.png').convert(),
+            pygame.image.load('sprites/santa/santa_left1.png').convert_alpha(),
+            pygame.image.load('sprites/santa/santa_left2.png').convert_alpha(),
+            pygame.image.load('sprites/santa/santa_left3.png').convert_alpha(),
             # Add more frames as needed
         ]
 
         self.player_images_right = [
-            pygame.image.load('sprites/santa/santa_right1.png').convert(),
-            pygame.image.load('sprites/santa/santa_right2.png').convert(),
-            pygame.image.load('sprites/santa/santa_right3.png').convert(),
+            pygame.image.load('sprites/santa/santa_right1.png').convert_alpha(),
+            pygame.image.load('sprites/santa/santa_right2.png').convert_alpha(),
+            pygame.image.load('sprites/santa/santa_right3.png').convert_alpha(),
             # Add more frames as needed
         ]
-        self.player_image_front = pygame.image.load(
-            'sprites/santa/santa_front2.png').convert()
+        self.player_image_front = pygame.image.load('sprites/santa/santa_front2.png').convert()
+
+        # Resize Santa images
+        self.player_images_left = [pygame.transform.scale(image, (new_width, new_height)) for image in self.player_images_left]
+        self.player_images_right = [pygame.transform.scale(image, (new_width, new_height)) for image in self.player_images_right]
+        self.player_image_front = pygame.transform.scale(self.player_image_front, (new_width, new_height))
 
         self.current_frame = 0
         self.image = self.player_images_left[self.current_frame]
@@ -110,4 +118,4 @@ class Player(pygame.sprite.Sprite):
     def jump(self):
         hits = pygame.sprite.spritecollide(self, self.platforms, False)
         if hits:
-            self.vel.y = -9
+            self.vel.y = -15
