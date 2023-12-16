@@ -12,6 +12,7 @@ RED = (255, 0, 0)
 # Set the new width and height for the resized Santa image
 new_width = 70
 new_height = 100
+vec = pygame.math.Vector2
 
 
 class Player(pygame.sprite.Sprite):
@@ -45,12 +46,12 @@ class Player(pygame.sprite.Sprite):
         self.image = self.player_images_left[self.current_frame]
         self.rect = self.image.get_rect()
 
-        self.pos = pygame.math.Vector2((10, 100))
+        self.pos = pygame.math.Vector2((25, 500))  # Adjust the height as needed
         self.vel = pygame.math.Vector2(0, 0)
         self.acc = pygame.math.Vector2(0, 0)
         self.facing_right = True  # Initialize facing direction
 
-        self.animation_speed = 200  # Adjust this value to control the animation speed
+        self.animation_speed = 150  # Adjust this value to control the animation speed
         self.animation_timer = pygame.time.get_ticks()
         self.clock = pygame.time.Clock()
 

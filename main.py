@@ -3,32 +3,31 @@ import pygame
 import sys
 from pygame.locals import *
 from player import Player
-from level import Level
-from level import Platform
+from level import Level, Platform
+from player import vec
 
 pygame.init()
 
-HEIGHT = 1000
+HEIGHT = 600
 WIDTH = 1000
 FPS = 60
+RED = (255, 0, 0)
 
 FramePerSec = pygame.time.Clock()
 
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Present Popper")
 
-level = Level(WIDTH, HEIGHT, (0, 0, 0), 0, 0)
+platforms = pygame.sprite.Group()
+PT1 = Level(WIDTH, 20, RED, 0, HEIGHT - 20, 500, 100)
+PT1.add_platform(Platform(WIDTH, 20, RED, WIDTH/2, HEIGHT - 20))  # Adding platform to the level
+platforms.add(PT1)
+P1 = Player(platforms)
+all_sprites = pygame.sprite.Group(PT1, P1)
 
-# Create instances of Platform directly within Level
-platform1 = level.add_platform(Platform(200, 20, (255, 0, 0), WIDTH / 2, HEIGHT - 10))
-platform2 = level.add_platform(Platform(150, 20, (255, 0, 0), WIDTH / 4, HEIGHT - 50))
+print("Endpoint location:", PT1.end_point.rect.topleft)
 
-all_sprites = pygame.sprite.Group()
-all_sprites.add(level.platforms)
-
-# Create the Player instance after initializing the platforms
-P1 = Player(level.platforms)
-all_sprites.add(P1)  # Add the player to the sprite group
+camera_offset = vec(0, 0)
 
 while True:
     for event in pygame.event.get():
@@ -44,7 +43,25 @@ while True:
     P1.move()
     P1.update()
 
-    all_sprites.draw(displaysurface)
+    camera_offset.x += (P1.pos.x - camera_offset.x - WIDTH/2) * 0.05
+    camera_offset.y += (P1.pos.y - camera_offset.y - HEIGHT/2) * 0.05
+
+    all_sprites = pygame.sprite.Group(PT1, P1)
+
+    for entity in all_sprites:
+        if isinstance(entity, Player):
+            displaysurface.blit(entity.image, entity.rect)
+        elif isinstance(entity, Level):
+            displaysurface.blit(entity.image, entity.rect)
+
+            # Iterate through endpoints and render them
+            for endpoint in entity.endpoints:
+                displaysurface.blit(endpoint.image, endpoint.rect)
+
+            # Check for collisions with the endpoint
+            if pygame.sprite.spritecollide(P1, entity.endpoints, False):
+                # Handle endpoint collision, start the next level or take appropriate action
+                print("Endpoint reached! Start the next level.")
 
     pygame.display.update()
     FramePerSec.tick(FPS)
