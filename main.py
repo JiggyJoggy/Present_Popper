@@ -1,5 +1,6 @@
 # main.py
 import pygame
+import sys
 from pygame.locals import *
 from player import Player
 from level import Level
@@ -20,7 +21,7 @@ level = Level(WIDTH, HEIGHT, (0, 0, 0), 0, 0)
 
 # Create instances of Platform directly within Level
 platform1 = level.add_platform(Platform(200, 20, (255, 0, 0), WIDTH / 2, HEIGHT - 10))
-platform2 = level.add_platform(Platform(150, 20, (255, 0, 0), WIDTH / 4, HEIGHT - 50))
+platform2 = level.add_platform(Platform(250, 20, (255, 0, 0), WIDTH / 4, HEIGHT - 50))
 
 all_sprites = pygame.sprite.Group()
 all_sprites.add(level.platforms)
