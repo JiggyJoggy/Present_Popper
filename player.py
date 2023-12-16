@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 from game_platform import Platform
+from physics import Object
 
 vec = pygame.math.Vector2
 
@@ -14,7 +15,7 @@ WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 
 
-class Player(pygame.sprite.Sprite):
+class Player(Object):
     def __init__(self):
         super().__init__()
         self.surf = pygame.Surface((30, 30))
@@ -35,23 +36,10 @@ class Player(pygame.sprite.Sprite):
         if pressed_keys[K_d]:
             self.acc.x = ACC
 
-        self.acc.x += self.vel.x * FRIC
-        self.vel += self.acc
-        self.pos += self.vel + 0.5 * self.acc
-
-        if self.pos.x > WIDTH:
-            self.pos.x = 0
-        if self.pos.x < 0:
-            self.pos.x = WIDTH
-
-        self.rect.midbottom = self.pos
-
-    def update(self):
-        hits = pygame.sprite.spritecollide(P1, platforms, False)
-        if P1.vel.y > 0:
-            if hits:
-                self.vel.y = 0
-                self.pos.y = hits[0].rect.top + 1
+        # if self.pos.x > WIDTH: # Keeps it in the border we have set with WIDTH
+        #     self.pos.x = 0
+        # if self.pos.x < 0:
+        #     self.pos.x = WIDTH
 
     def jump(self):
         hits = pygame.sprite.spritecollide(self, platforms, False)

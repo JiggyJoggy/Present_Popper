@@ -17,7 +17,8 @@ FramePerSec = pygame.time.Clock()
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Present Popper")
 
-all_sprites = pygame.sprite.Group(PT1, P1)
+rectangles = []
+all_sprites = pygame.sprite.Group(PT1, P1, rectangles)
 
 camera_offset = vec(0, 0)
 
@@ -29,6 +30,10 @@ while True:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE or event.key == pygame.K_w:
                 P1.jump()
+        # elif event.type == pygame.MOUSEBUTTONDOWN:
+        #     mouse_x, mouse_y = pygame.mouse.get_pos()
+        #     new_rect = pygame.Rect(mouse_x, mouse_y, 30, 30)
+        #     rectangles.append(new_rect)
 
     displaysurface.fill((0, 0, 0))
 
