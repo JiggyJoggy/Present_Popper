@@ -3,7 +3,7 @@ from pygame.locals import *
 
 HEIGHT = 1000
 WIDTH = 1000
-ACC = 1
+ACC = .5
 FRIC = -0.12
 FPS = 60
 WHITE = (255, 255, 255)
@@ -110,4 +110,4 @@ class Player(pygame.sprite.Sprite):
     def jump(self):
         hits = pygame.sprite.spritecollide(self, self.platforms, False)
         if hits:
-            self.vel.y = -9
+            self.vel.y = -15
