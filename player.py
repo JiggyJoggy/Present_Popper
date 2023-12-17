@@ -1,9 +1,11 @@
+# player.py
+
 import pygame
 from pygame.locals import K_a, K_d
 
-HEIGHT = 1000
+HEIGHT = 600
 WIDTH = 1000
-ACC = 1
+ACC = 1.5
 FRIC = -0.12
 FPS = 60
 WHITE = (255, 255, 255)
@@ -82,11 +84,6 @@ class Player(pygame.sprite.Sprite):
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
 
-        if self.pos.x > WIDTH:
-            self.pos.x = 0
-        if self.pos.x < 0:
-            self.pos.x = WIDTH
-
         self.rect.midbottom = self.pos
 
     def update(self):
@@ -132,4 +129,4 @@ class Player(pygame.sprite.Sprite):
     def jump(self):
         hits = pygame.sprite.spritecollide(self, self.platforms, False)
         if hits:
-            self.vel.y = -15
+            self.vel.y = -10
